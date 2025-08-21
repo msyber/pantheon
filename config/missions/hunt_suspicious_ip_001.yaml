@@ -1,0 +1,37 @@
+# Defines a specific mission to be executed
+mission_id: "hunt_suspicious_ip_001"
+agent_definitions: "cyber_security_team"
+platform: "local"
+orchestrator_adapter: "crewai"
+
+mission_inputs:
+  suspicious_ip: "198.51.100.42"
+
+governance:
+  economic_governor:
+    budget_usd: 1.00 # Mission budget, we are frigual :)
+
+workflow_definition:
+  workflow_type: "sequential"
+  steps:
+    - task_id: "investigate_siem"
+      agent_id: "log_analyst_01"
+    - task_id: "query_threat_intel"
+      agent_id: "log_analyst_01"
+    - type: "human_approval"
+      name: "approve_remediation_plan"
+      prompt: "The Log Analyst has completed the investigation. Do you approve the Incident Responder to proceed with developing a remediation plan?"
+    - task_id: "develop_remediation_plan"
+      agent_id: "incident_responder_01"
+    - task_id: "create_incident_ticket"
+      agent_id: "incident_responder_01"
+
+task_definitions:
+  - id: "investigate_siem"
+    description: "Investigate the SIEM logs for any activity related to the suspicious IP: {suspicious_ip}."
+  - id: "query_threat_intel"
+    description: "Query threat intelligence databases for information about the IP address: {suspicious_ip}."
+  - id: "develop_remediation_plan"
+    description: "Based on the investigation, develop a remediation plan. This can include proposing firewall rules, isolating hosts, or other appropriate actions."
+  - id: "create_incident_ticket"
+    description: "Create a ticket in the ticketing system to document the incident and the remediation plan."

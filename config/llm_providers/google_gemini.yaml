@@ -1,0 +1,4 @@
+# Defines the connection to a specific model via a specific provider
+provider: "google_vertex_ai"
+model: "gemini-2.5-flash-lite"
+# Project ID, location, and credentials will be loaded from the .env file

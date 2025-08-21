@@ -1,0 +1,12 @@
+# Defines the workflow logic for the mission
+workflow_type: "sequential"
+steps:
+  - task_id: "analyze_logs"
+    agent_id: "log_analyst_01"
+
+  - type: "human_approval" # This step requires human approval before proceeding (Yes Human In the Loop still applies)
+    name: "approve_remediation_plan"
+    prompt: "The Log Analyst has confirmed a threat. Do you approve the Incident Responder to proceed with drafting a firewall rule?"
+
+  - task_id: "propose_response"
+    agent_id: "incident_responder_01"

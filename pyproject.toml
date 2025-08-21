@@ -1,0 +1,30 @@
+[project]
+name = "pantheon"
+version = "0.1.0"
+description = "Project Pantheon: A command and governance system for multi-agent AI."
+authors = [{ name = "Sylvain", email = "msyber@gmail.com" }]
+requires-python = ">=3.11"
+dependencies = [
+    "crewai",
+    "python-dotenv",
+    "pyyaml",
+    "langchain-google-vertexai",
+    "langsmith",
+    "crewai-tools",
+    "faiss-cpu",
+    "sentence-transformers",
+    "langchain-huggingface",
+    "openai",
+    "ruff",
+    "langgraph",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+line-length = 88
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I"]

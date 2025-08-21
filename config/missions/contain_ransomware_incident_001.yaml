@@ -1,0 +1,41 @@
+mission_id: "contain_ransomware_incident_001"
+agent_definitions: "cyber_security_team" # Re-use existing agent definitions
+platform: "local"
+orchestrator_adapter: "crewai"
+
+mission_inputs:
+  affected_host_ip: "10.0.0.100"
+  ransomware_variant: "WannaCry"
+
+governance:
+  economic_governor:
+    budget_usd: 2.50 # Slightly higher budget for a more complex mission
+
+workflow_definition:
+  workflow_type: "sequential"
+  steps:
+    - task_id: "isolate_affected_host"
+      agent_id: "incident_responder_01"
+    - task_id: "block_c2_traffic"
+      agent_id: "network_engineer_01"
+    - task_id: "collect_forensic_artifacts"
+      agent_id: "forensics_analyst_01"
+    - type: "human_approval"
+      name: "approve_eradication_plan"
+      prompt: "The initial containment and forensic collection are complete. Do you approve proceeding with the eradication plan (e.g., system wipe, re-imaging)? This is a critical step."
+    - task_id: "update_incident_ticket_containment"
+      agent_id: "incident_responder_01"
+    - task_id: "notify_stakeholders"
+      agent_id: "incident_responder_01"
+
+task_definitions:
+  - id: "isolate_affected_host"
+    description: "Isolate the affected host {affected_host_ip} from the network to prevent further spread of the ransomware."
+  - id: "block_c2_traffic"
+    description: "Identify and block any Command and Control (C2) traffic associated with the {ransomware_variant} ransomware at the network perimeter."
+  - id: "collect_forensic_artifacts"
+    description: "Collect critical forensic artifacts (e.g., memory dumps, disk images, logs) from the affected host {affected_host_ip} for in-depth analysis."
+  - id: "update_incident_ticket_containment"
+    description: "Update the incident ticket with details of the containment actions taken and initial findings."
+  - id: "notify_stakeholders"
+    description: "Draft a concise notification to relevant stakeholders (e.g., management, legal) about the confirmed ransomware incident and containment status."

@@ -1,0 +1,5 @@
+agents:
+  - id: "archivist_01"
+    role: "AI Mission Archivist"
+    goal: "Analyze the final result of a mission and summarize the key lesson learned in a single, concise sentence."
+    llm_provider: "google_gemini"

@@ -1,0 +1,4 @@
+# Defines the connection to a specific model via a specific provider
+provider: "openai"
+model: "gpt-5-nano"
+# The OPENAI_API_KEY will be loaded from the .env file

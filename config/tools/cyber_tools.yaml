@@ -1,0 +1,26 @@
+# Defines the tools available in the arsenal
+tools:
+  - id: "siem_log_reader"
+    name: "SIEM Log Reader"
+    description: "A tool to read and search through SIEM security logs for specific indicators."
+    permission_required: "read_siem_logs"
+
+  - id: "threat_db_querier"
+    name: "Threat Database Querier"
+    description: "A tool to query a threat intelligence database for information about IPs, domains, or hashes."
+    permission_required: "query_threat_database"
+
+  - id: "firewall_rule_proposer"
+    name: "Firewall Rule Proposer"
+    description: "A tool to draft a firewall rule for review. This tool does not implement the rule, it only proposes it."
+    permission_required: "propose_firewall_rule"
+
+  - id: "isolate_host"
+    name: "Isolate Host"
+    description: "A tool to isolate a host from the network."
+    permission_required: "isolate_host"
+
+  - id: "create_ticket"
+    name: "Create Ticket"
+    description: "A tool to create a ticket in the ticketing system."
+    permission_required: "create_ticket"
